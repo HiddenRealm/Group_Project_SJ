@@ -1,5 +1,64 @@
-{% extends "layout.html" %}
-{% block body_content %}
-	<h1>Home Page</h1>
-	<p>Welcome to this web app!</p>
-{% endblock body_content %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{{ title }} - Page</title>
+
+		<style>
+			span {
+				color: red;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>{{ title }} Page</h1>
+		<p>Welcome to this web app, You can try to win a prize!</p>
+		
+		<div class="form">
+			<form method="POST" actions="">
+				{{ form.hidden_tag() }}
+
+				<div class="form-group">
+					{{ form.name.label }}
+					{{ form.name }}
+					{% if form.name.errors %}
+						<div class="error">
+							{% for error in form.name.errors %}
+								<span> {{ error }}</span>
+							{% endfor %}
+						</div>
+					{% endif %}
+				</div><br>
+
+				<div class="form-group">
+					{{ form.email.label }}
+					{{ form.email }}
+					{% if form.email.errors %}
+						<div class="error">
+							{% for error in form.email.errors %}
+								<span> {{ error }}</span>
+							{% endfor %}
+						</div>
+					{% endif %}
+				</div><br>
+
+				<div class="form-group">
+					{{ form.mobile.label }}
+					{{ form.mobile }}
+					{% if form.mobile.errors %}
+						<div class="error">
+							{% for error in form.mobile.errors %}
+								<span> {{ error }}</span>
+							{% endfor %}
+						</div>
+					{% endif %}
+				</div><br>
+
+				<div class="form-group">
+					{{ form.submit.label }}
+					{{ form.submit }}
+				</div><br>
+			</form>
+		</div>
+	</body>
+</html>
