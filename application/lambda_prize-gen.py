@@ -4,7 +4,7 @@ from boto3.dynamodb.conditions import Key
 import random
 
 def lambda_handler(event, context):
-    randomnum = random.randint(1,101)
+    randomnum = random.randint(1,100)
     region='eu-west-1'
     recList=[]
     dyndb = boto3.resource('dynamodb', region_name=region)
