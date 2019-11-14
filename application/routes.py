@@ -1,10 +1,8 @@
 from flask import render_template, redirect, url_for, request
 from application import app
 from application.forms import WinForm
-from application.letter_gen import Letter_gen
-from application.num_gen import Number_gen
-from application.prize_gen import Prize_gen
-from random import shuffle
+import boto3
+import json
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/home', methods=['GET', 'POST'])
@@ -12,25 +10,25 @@ def home():
 	form = WinForm()
 
 	if form.validate_on_submit():
-		temp2 = (Letter_gen() + str(Number_gen()))
-		char_list = list(temp2)
-		shuffle(char_list)
-		temp2 = ''.join(char_list)
+		random = boto3.client('lambda')
+
+		account = random.invoke(FunctionName='AccountCreation',
+								InvocationType='RequestResponse')
+
+		prize = random.invoke(FunctionName='PrizeGen',
+								InvocationType='RequestResponse')
+
+		temp = json.loads(prize['Payload'].read().decode("utf-8"))
+		temp2 = json.loads(account['Payload'].read().decode("utf-8"))
 		
-		
-		lists = send_data(form.name.data, temp2, form.email.data, 
-				  form.mobile.data, Prize_gen())
-		print (lists)
-		
+		package = send_data(form.name.data, temp2, form.email.data, 
+				  form.mobile.data, temp)
+
+		random.invoke(FunctionName='PushingData',
+						Payload=json.dumps(package))
+
 	return render_template('home.html', title='Home', form=form)
 
 def send_data(name, acc, ema, mob, prize):
-	output = []
-	
-	output.append(name)
-	output.append(acc)
-	output.append(ema)
-	output.append(mob)
-	output.append(prize)
-	
+	output = { "account":acc, "name":name, "email":ema, "mobile":str(mob), "prize":prize}
 	return output
