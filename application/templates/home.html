@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>{{ title }} - Page</title>
+		<title>Prize Draw</title>
 
 		<style>
 			span {
@@ -15,12 +15,13 @@
 				background-size: contain;
 			}
 		</style>
+
 	</head>
 
 	<body>
 		<h1>{{ title }} Page</h1>
 		<p>Welcome to this web app, You can try to win a prize!</p>
-		
+
 		<div class="form">
 			<form method="POST" actions="">
 				{{ form.hidden_tag() }}
@@ -65,6 +66,10 @@
 					{{ form.submit.label }}
 					{{ form.submit }}
 				</div><br>
+
+				<div class="Success">
+					<p>{{ prize }}</p>
+				</div>
 			</form>
 		</div>
 	</body>
