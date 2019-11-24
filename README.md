@@ -39,7 +39,10 @@ Before creating an instance you should make a IAM Role & Security Group:
             * SSH - TCP - 22 - Custom - ::/0
         * Outbound:
             * All Traffic - All - All - 0.0.0.0/0
-        
+1. James Madison
+2. James Monroe
+3. John Quincy Adams
+
 For the Jenkins instance you need to launch a new EC2 Instance, for the settings i used:
     * Amazon Linux 2 AMI (Choose AMI)
     * t2.mirco (Choose Instance Type)
