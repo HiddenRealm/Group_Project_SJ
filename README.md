@@ -24,14 +24,15 @@ These are all the things you should expect to find here.
     
 ## Jenkins EC2 Instance:
 Before creating an instance you should make a IAM Role & Security Group:
-    IAM Role - Create Role:
+
+###### IAM Role - Create Role:
 1. Select type of trusted entity (AWS Service)
 2. Choose the service thay will use this role (EC2)
 3. Attach the following Permissions:
     1. AWSLambdaFullAccess
 4. Name the Role 'EC2'
     
-    Security Group - Create Security Group:
+###### Security Group - Create Security Group:
 1. Security Group Name 'Jenkins'
 2. Inbound:
     1. Custom TCP Rule - TCP - 8080 - Custom - 0.0.0.0/0
@@ -41,34 +42,34 @@ Before creating an instance you should make a IAM Role & Security Group:
 4. Outbound:
     1. All Traffic - All - All - 0.0.0.0/0
             
-For the Jenkins instance you need to launch a new EC2 Instance, for the settings i used:
+###### For the Jenkins instance you need to launch a new EC2 Instance, for the settings i used:
 1. Amazon Linux 2 AMI (Choose AMI)
 2. t2.mirco (Choose Instance Type)
 3. IAM Role - Drop down menu - Choose 'EC2' (Configure Instance)
 4. Enable CloudWatch Detailed Monitoring (Configure Instance)
 5. Select Existing security group (Configure Security Group)
 6. Select 'Jenkins' (Configure Security Group)
-These are all of the changes you will need to make to the default settings
-Once you SSH into the instance you will need to install Jenkins
-  
+These are all of the changes you will need to make to the default settings  
+Once you SSH into the instance you will need to install Jenkins  
+
     sudo yum install -y jenkins
     #you can check the status of the jenkins daemon with
     sudo systemctl status jenkins
 
-Once thats done you can get your IPV4 from AWS and put that into a new tab, make sure the IPV4 is followed by ':8080'
-it will ask for a key, take the line of code in red and run the cat command on that path inside your jenkins instance,
-this should give you the key to access jenkins.
-
-Install the sugested addons and make an account.
+Once thats done you can get your IPV4 from AWS and put that into a new tab, make sure the IPV4 is followed by ':8080'  
+it will ask for a key, take the line of code in red and run the cat command on that path inside your jenkins instance,  
+this should give you the key to access jenkins.  
+  
+Install the sugested addons and make an account.  
 While you're waiting you can use the IPV4 to webhook to your forked version of this repo.
 
     http://52.18.231.98:8080/github-webhook/
 
-It will look similar to that, but with your IPV4.
-Back to jenkins, create a new item & name it.
-Make sure its a 'Freestyle Project'
+It will look similar to that, but with your IPV4.  
+Back to jenkins, create a new item & name it.  
+Make sure its a 'Freestyle Project'  
 
-Inside Jenkins Configure you need to:
+Inside Jenkins Configure you need to:  
 1. Paste your forked github link - Git - (Source Code Management)
 2. Tick 'GitHub hook trigger for GITScm Polling (Build Triggers)
 3. Paste the following commands inside the execute shell (Build):
@@ -78,9 +79,9 @@ Inside Jenkins Configure you need to:
         sudo docker push (dockerHub-Username)/prize-draw:latest
         sudo docker rmi -f (dockerHub-Username)/prize-draw
 
-**You may need to disable CSRF Project in jenkins for the webhook to work**
-**This setting can be found by clicking 'Manage Jenkins'**
-**Then choosing 'Configure Global Security'**
+**You may need to disable CSRF Project in jenkins for the webhook to work**  
+**This setting can be found by clicking 'Manage Jenkins'**  
+**Then choosing 'Configure Global Security'**  
 This should be the Jenkins EC2 Instance complete.
 
 ## EC2 AMI
