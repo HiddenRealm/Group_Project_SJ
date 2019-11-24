@@ -25,31 +25,29 @@ These are all the things you should expect to find here.
 ## Jenkins EC2 Instance:
 Before creating an instance you should make a IAM Role & Security Group:
     IAM Role - Create Role:
-        * Select type of trusted entity (AWS Service)
-        * Choose the service thay will use this role (EC2)
-        * Attach the following Permissions:
-            * AWSLambdaFullAccess
-        * Name the Role 'EC2'
+1. Select type of trusted entity (AWS Service)
+2. Choose the service thay will use this role (EC2)
+3. Attach the following Permissions:
+    1. AWSLambdaFullAccess
+4. Name the Role 'EC2'
+    
     Security Group - Create Security Group:
-        * Security Group Name 'Jenkins'
-        * Inbound:
-            * Custom TCP Rule - TCP - 8080 - Custom - 0.0.0.0/0
-            * Custom TCP Rule - TCP - 8080 - Custom - ::/0
-            * SSH - TCP - 22 - Custom - 0.0.0.0/0
-            * SSH - TCP - 22 - Custom - ::/0
-        * Outbound:
-            * All Traffic - All - All - 0.0.0.0/0
-1. James Madison
-2. James Monroe
-3. John Quincy Adams
-
+1. Security Group Name 'Jenkins'
+2. Inbound:
+    1. Custom TCP Rule - TCP - 8080 - Custom - 0.0.0.0/0
+    2. Custom TCP Rule - TCP - 8080 - Custom - ::/0
+    3. SSH - TCP - 22 - Custom - 0.0.0.0/0
+    4. SSH - TCP - 22 - Custom - ::/0
+4. Outbound:
+    1. All Traffic - All - All - 0.0.0.0/0
+            
 For the Jenkins instance you need to launch a new EC2 Instance, for the settings i used:
-    * Amazon Linux 2 AMI (Choose AMI)
-    * t2.mirco (Choose Instance Type)
-    * IAM Role - Drop down menu - Choose 'EC2' (Configure Instance)
-    * Enable CloudWatch Detailed Monitoring (Configure Instance)
-    * Select Existing security group (Configure Security Group)
-    * Select 'Jenkins' (Configure Security Group)
+1. Amazon Linux 2 AMI (Choose AMI)
+2. t2.mirco (Choose Instance Type)
+3. IAM Role - Drop down menu - Choose 'EC2' (Configure Instance)
+4. Enable CloudWatch Detailed Monitoring (Configure Instance)
+5. Select Existing security group (Configure Security Group)
+6. Select 'Jenkins' (Configure Security Group)
 These are all of the changes you will need to make to the default settings
 Once you SSH into the instance you will need to install Jenkins
   
@@ -71,18 +69,18 @@ Back to jenkins, create a new item & name it.
 Make sure its a 'Freestyle Project'
 
 Inside Jenkins Configure you need to:
-    * Paste your forked github link - Git - (Source Code Management)
-    * Tick 'GitHub hook trigger for GITScm Polling (Build Triggers)
-    * Paste the following commands inside the execute shell (Build):
+1. Paste your forked github link - Git - (Source Code Management)
+2. Tick 'GitHub hook trigger for GITScm Polling (Build Triggers)
+3. Paste the following commands inside the execute shell (Build):
         
         sudo docker login -u (dockerHub-Username) -p (dockerHub-Password)
         sudo docker build -t (dockerHub-Username)/prize-draw:latest .
         sudo docker push (dockerHub-Username)/prize-draw:latest
         sudo docker rmi -f (dockerHub-Username)/prize-draw
 
---- You may need to disable CSRF Project in jenkins for the webhook to work ---
---- This setting can be found by clicking 'Manage Jenkins' ---
---- Then choosing 'Configure Global Security' ---
+**You may need to disable CSRF Project in jenkins for the webhook to work**
+**This setting can be found by clicking 'Manage Jenkins'**
+**Then choosing 'Configure Global Security'**
 This should be the Jenkins EC2 Instance complete.
 
 ## EC2 AMI
