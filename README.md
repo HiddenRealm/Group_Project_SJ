@@ -48,7 +48,7 @@ Before creating an instance you should make a IAM Role & Security Group:
 3. IAM Role - Drop down menu - Choose 'EC2' (Configure Instance)
 4. Enable CloudWatch Detailed Monitoring (Configure Instance)
 5. Select Existing security group (Configure Security Group)
-6. Select 'Jenkins' (Configure Security Group)
+6. Select 'Jenkins' (Configure Security Group)  
 These are all of the changes you will need to make to the default settings  
 Once you SSH into the instance you will need to install Jenkins  
 
