@@ -8,7 +8,56 @@ Group Project for QA, Prize Generator
 
     The rest of the read-me is the install & build instructions
 
-# Pre Requisites:
-    Clone this repo down
-    Check Python3 is installed
-    CD into Group_Project_SJ/scripts
+# Contents:
+Throughout this readme you are going to need to create a number of diffent AWS systems, this README should instruct you of how to do this.
+These are all the things you should expect to find here.
+    
+    Single EC2 Instance for Jenkins
+    Complete Usable EC2 Instance & It's AMI
+    Auto-Scaler
+    Load-Balancer
+    All of the Lambda Functions needed to run the Application
+    DynamoDB instance needed for Database
+    SQS Configuration
+    Pinpoint Configuration
+    S3 Bucket
+    
+# Jenkins EC2 Instance:
+
+
+# EC2 AMI
+
+
+# Auto-Scaler
+
+
+# Load-Balancer
+
+
+# Lambda's
+Here you will find information on how to set up all of the Lambda's you will need to run this app.
+## LetterGen
+
+## PrizeGen
+
+## NumGen
+
+## loadcsv
+
+## PushDataToQueue
+
+## ListenAndPush
+
+## AccountCreation
+
+# DynamoDB
+
+
+# SQS
+
+
+# Pinpoint (SES & SMS)
+
+
+# S3 Bucket
+
