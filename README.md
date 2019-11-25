@@ -86,7 +86,72 @@ Inside Jenkins Configure you need to:
 This should be the Jenkins EC2 Instance complete.
 
 ## EC2 AMI
+Before Creating this Instance you should make a new Security group, we can use the same IAM Role as before.  
 
+###### Security Group - Create Security Group:
+1. Security Group Name 'Front-end Sec-Grp'
+2. Inbound:
+    1. HTTP - TCP - 80 - Custom - 0.0.0.0/0
+    2. HTTP - TCP - 80 - Custom - ::/0
+    3. SSH - TCP - 22 - Custom - 0.0.0.0/0
+    4. SSH - TCP - 22 - Custom - ::/0
+4. Outbound:
+    1. All Traffic - All - All - 0.0.0.0/0
+
+###### For the Main instance you need to launch a new EC2 Instance, for the settings i used:
+1. Amazon Linux 2 AMI (Choose AMI)
+2. t2.mirco (Choose Instance Type)
+3. IAM Role - Drop down menu - Choose 'EC2' (Configure Instance)
+4. Enable CloudWatch Detailed Monitoring (Configure Instance)
+5. Select Existing security group (Configure Security Group)
+6. Select 'Front-end Sec-Grp' (Configure Security Group)
+
+These are all of the changes you will need to make to the default settings  
+Once you SSH into the instance you will need to install Docker:  
+
+    sudo yum update -y
+    sudo amazon-linux-extras install -y docker
+    sudo service docker start
+    #you can check the status of the docker daemon with
+    sudo systemctl status docker
+    
+Next we are going to set up the crontab, to do this enter:  
+
+    crontab -e
+
+Inside this file enter:  
+
+    * * * * * ./Scripts/Updating.sh
+   
+Now in the root directory type:  
+
+     mkdir Scripts
+     cd Scripts
+     nano Updating.sh
+
+Inside the Updating script paste in this code:  
+
+    #!/bin/bash
+    sudo docker pull hiddenrealm/prize-draw
+    sudo docker history --format "{{.CreatedAt}}" hiddenrealm/prize-draw |head -n 1 > /tm
+    p/temp.txt
+    sudo docker rmi -f hiddenrealm/prize-draw
+
+    docker=$(head -n 1 /tmp/temp.txt)
+    aws=$(head -n 1 /tmp/awsVersion.txt)
+
+    if [ "$docker" != "$aws" ]
+    then
+    echo "$docker" > /tmp/awsVersion.txt
+    sudo docker rm -f prize
+    sudo docker rmi -f keep-this
+    sudo docker pull hiddenrealm/prize-draw
+    sudo docker tag hiddenrealm/prize-draw keep-this
+    sudo docker run -d -p 80:5000 --name prize hiddenrealm/prize-draw
+    fi
+
+Back on the AWS webpage select the EC2 instance, click Action -> Image -> Create Image  
+Name it 'Prize-AMI'  
 
 ## Auto-Scaler
 
