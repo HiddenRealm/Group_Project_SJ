@@ -7,7 +7,7 @@ def lambda_handler(event, context):
     try:            
         s3=boto3.client('s3')            
         dyndb = boto3.client('dynamodb', region_name=region)
-        confile= s3.get_object(Bucket='testbucket123212321', Key='prizes.csv')
+        confile= s3.get_object(Bucket='(S3-BUCKET-NAME)', Key='prizes.csv')
         recList = confile['Body'].read().split('\n')
         csv_reader = csv.reader(recList)
         count = 0
