@@ -194,8 +194,8 @@ DynamoFullAccess:
     1. Select type of trusted entity (AWS Service)
     2. Choose the service thay will use this role (Lambda)
     3. Attach the following Permissions:
-        1. AWSLambdaFullAccess
-    4. Name the Role 'EC2'
+        1. AmazonDynamoDBFullAccess
+    4. Name the Role 'DynamoFullAccess'
 
 Dynamo+Lambda-Control:  
 
@@ -203,21 +203,92 @@ Dynamo+Lambda-Control:
     2. Choose the service thay will use this role (Lambda)
     3. Attach the following Permissions:
         1. AWSLambdaFullAccess
-    4. Name the Role 'EC2'
+        2. AmazonDynamoDBFullAccess
+    4. Name the Role 'Dynamo+Lambda-Control'
+
+S3-Admin-Access:
+
+    1. Select type of trusted entity (AWS Service)
+    2. Choose the service thay will use this role (Lambda)
+    3. Attach the following Permissions:
+        1. AmazonS3FullAccess
+        2. AmazonDynamoDBFullAccess
+    4. Name the Role 'S3-Admin-Access'
+
+Lambda-SNS:
+
+    1. Select type of trusted entity (AWS Service)
+    2. Choose the service thay will use this role (Lambda)
+    3. Attach the following Permissions:
+        1. AWSLambdaFullAccess
+        2. AdministratorAccess
+    4. Name the Role 'Lambda-SNS'
+    
+LambdaToSQS:
+
+    1. Select type of trusted entity (AWS Service)
+    2. Choose the service thay will use this role (Lambda)
+    3. Attach the following Permissions:
+        1. AmazonSQSFullAccess
+        2. AmazonDynamoDBFullAccess
+        3. AdministratorAccess
+    4. Name the Role 'LambdaToSQS'
+    
+Lambda:
+
+    1. Select type of trusted entity (AWS Service)
+    2. Choose the service thay will use this role (Lambda)
+    3. Attach the following Permissions:
+    4. Name the Role 'Lambda'
 
 ### LetterGen
+1. Create function
+2. Name 'LetterGen'
+3. Runtime 'Python 3.8'
+4. Choose an Execution role -> Use Existing -> Lambda
+5. In the Fucntion code paste 'lambda_letter-gen.py' from the application folder of this repo.
 
 ### PrizeGen
+1. Create function
+2. Name 'PrizeGen'
+3. Runtime 'Python 3.8'
+4. Choose an Execution role -> Use Existing -> DynamoFullAccess
+5. In the Fucntion code paste 'lambda_prize-gen.py' from the application folder of this repo.
 
 ### NumGen
+1. Create function
+2. Name 'NumGen'
+3. Runtime 'Python 3.8'
+4. Choose an Execution role -> Use Existing -> Lambda
+5. In the Fucntion code paste 'lambda_num-gen.py' from the application folder of this repo.
 
 ### loadcsv
+1. Create function
+2. Name 'loadcsv'
+3. Runtime 'Python 3.8'
+4. Choose an Execution role -> Use Existing -> S3-Admin-Access
+5. In the Fucntion code paste 'lambda_load-csv.py' from the application folder of this repo.
 
 ### PushDataToQueue
+1. Create function
+2. Name 'PushDataToQueue'
+3. Runtime 'Python 3.8'
+4. Choose an Execution role -> Use Existing -> Lambda-SNS
+5. In the Fucntion code paste 'lambda_pushing-data.py' from the application folder of this repo.
 
 ### ListenAndPush
+1. Create function
+2. Name 'ListenAndPush'
+3. Runtime 'Python 3.8'
+4. Choose an Execution role -> Use Existing -> LambdaToSQS
+5. In the Fucntion code paste 'lambda_sqs-listen.py' from the application folder of this repo.
 
 ### AccountCreation
+1. Create function
+2. Name 'AccountCreation'
+3. Runtime 'Python 3.8'
+4. Choose an Execution role -> Use Existing -> Dynamo+Lambda-Control
+5. In the Fucntion code paste 'lambda_account-creation.py' from the application folder of this repo.
 
 ## DynamoDB
 
