@@ -282,6 +282,11 @@ Lambda:
 3. Runtime 'Python 3.8'
 4. Choose an Execution role -> Use Existing -> LambdaToSQS
 5. In the Fucntion code paste 'lambda_sqs-listen.py' from the application folder of this repo.
+6. In the Designer hit '+ Add trigger':  
+    1. Find SQS. 
+    2. Select your SQS - StandardQueue
+    3. Batch - 10
+    4. Tick Enable Trigger
 
 ### AccountCreation
 1. Create function
@@ -294,10 +299,22 @@ Lambda:
 
 
 ## SQS
-
+1. Create New Queue
+2. Name - 'StandardQueue'
+3. Standard Queue
+4. Quick-Create Queue
 
 ## Pinpoint (SES & SMS)
-
+1. Create a Project
+2. Name - 'SNS'
+3. Click Configure on the email button:  
+    1. Enter an email to get verified.
+    2. Once verified you can send emails to this address.
+    3. For the ability to send to any emails you need to open a ticket on the support center.
+4. Click Configure on the SMS & Voice button:  
+    1. Tick enable SMS channel for this project
+    2. You start with a limit of $1 worth of texts
+    3. To increase this you need to open a ticket on the support center.
 
 ## S3 Bucket
 
