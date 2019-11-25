@@ -21,9 +21,9 @@ These are all the things you should expect to find here.
     SQS Configuration
     Pinpoint Configuration
     S3 Bucket
-    
-## Jenkins EC2 Instance:
-Before creating an instance you should make a IAM Role & Security Group:
+
+## EC2 Instances:
+Before you start creating the actual instances you should make the IAM role & Security Groups.
 
 ###### IAM Role - Create Role:
 1. Select type of trusted entity (AWS Service)
@@ -41,6 +41,18 @@ Before creating an instance you should make a IAM Role & Security Group:
     4. SSH - TCP - 22 - Custom - ::/0
 4. Outbound:
     1. All Traffic - All - All - 0.0.0.0/0
+
+###### Security Group - Create Security Group:
+1. Security Group Name 'Front-end Sec-Grp'
+2. Inbound:
+    1. HTTP - TCP - 80 - Custom - 0.0.0.0/0
+    2. HTTP - TCP - 80 - Custom - ::/0
+    3. SSH - TCP - 22 - Custom - 0.0.0.0/0
+    4. SSH - TCP - 22 - Custom - ::/0
+4. Outbound:
+    1. All Traffic - All - All - 0.0.0.0/0
+
+### Jenkins EC2 Instance:
             
 ###### For the Jenkins instance you need to launch a new EC2 Instance, for the settings i used:
 1. Amazon Linux 2 AMI (Choose AMI)
@@ -85,18 +97,7 @@ Inside Jenkins Configure you need to:
 **Then choosing 'Configure Global Security'**  
 This should be the Jenkins EC2 Instance complete.
 
-## EC2 AMI
-Before Creating this Instance you should make a new Security group, we can use the same IAM Role as before.  
-
-###### Security Group - Create Security Group:
-1. Security Group Name 'Front-end Sec-Grp'
-2. Inbound:
-    1. HTTP - TCP - 80 - Custom - 0.0.0.0/0
-    2. HTTP - TCP - 80 - Custom - ::/0
-    3. SSH - TCP - 22 - Custom - 0.0.0.0/0
-    4. SSH - TCP - 22 - Custom - ::/0
-4. Outbound:
-    1. All Traffic - All - All - 0.0.0.0/0
+### EC2 AMI
 
 ###### For the Main instance you need to launch a new EC2 Instance, for the settings i used:
 1. Amazon Linux 2 AMI (Choose AMI)
