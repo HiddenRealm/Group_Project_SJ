@@ -297,7 +297,17 @@ Lambda:
 5. In the Fucntion code paste 'lambda_account-creation.py' from the application folder of this repo.
 
 ## DynamoDB
+###prizedraw
+1. Create Table
+2. Name - 'prizedraw'
+3. Partition Key - 'account' (String)
+4. Create
 
+###prizes
+1. Create Table
+2. Name - 'prizes'
+3. Partition Key - 'id' (Number)
+4. Create
 
 ## SQS
 1. Create New Queue
