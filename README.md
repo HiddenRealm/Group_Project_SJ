@@ -14,8 +14,8 @@ These are all the things you should expect to find here.
     
     Single EC2 Instance for Jenkins
     Complete Usable EC2 Instance & It's AMI
-    Auto-Scaler
     Load-Balancer
+    Auto-Scaler
     All of the Lambda Functions needed to run the Application
     DynamoDB instance needed for Database
     SQS Configuration
@@ -133,10 +133,10 @@ Now in the root directory type:
 Inside the Updating script paste in this code:  
 
     #!/bin/bash
-    sudo docker pull hiddenrealm/prize-draw
-    sudo docker history --format "{{.CreatedAt}}" hiddenrealm/prize-draw |head -n 1 > /tm
+    sudo docker pull (dockerHub-Username)/prize-draw
+    sudo docker history --format "{{.CreatedAt}}" (dockerHub-Username)/prize-draw |head -n 1 > /tm
     p/temp.txt
-    sudo docker rmi -f hiddenrealm/prize-draw
+    sudo docker rmi -f (dockerHub-Username)/prize-draw
 
     docker=$(head -n 1 /tmp/temp.txt)
     aws=$(head -n 1 /tmp/awsVersion.txt)
@@ -146,18 +146,42 @@ Inside the Updating script paste in this code:
     echo "$docker" > /tmp/awsVersion.txt
     sudo docker rm -f prize
     sudo docker rmi -f keep-this
-    sudo docker pull hiddenrealm/prize-draw
-    sudo docker tag hiddenrealm/prize-draw keep-this
-    sudo docker run -d -p 80:5000 --name prize hiddenrealm/prize-draw
+    sudo docker pull (dockerHub-Username)/prize-draw
+    sudo docker tag (dockerHub-Username)/prize-draw keep-this
+    sudo docker run -d -p 80:5000 --name prize (dockerHub-Username)/prize-draw
     fi
 
 Back on the AWS webpage select the EC2 instance, click Action -> Image -> Create Image  
 Name it 'Prize-AMI'  
 
-## Auto-Scaler
-
-
 ## Load-Balancer
+Under 'Load Balancing' Select 'Load Balancers':  
+1. Create Load Balancer
+2. Application Load Balancer
+3. Name it
+4. Select any 2 Availability Zones
+5. Select Existing Security Group - (Front-end Sec-Grp)
+6. New Name
+7. Create
+
+## Auto-Scaler
+Under 'Auto Scaling' Select 'Auto Scaling Groups':  
+1. Create Auto Scaling group
+2. Launch Configuration
+3. My AMIs -> 'Prize-AMI'
+4. t2.micro
+5. Name it
+6. IAM Role -> EC2
+7. Tick Monitoring
+8. Select Existing Security Group - (Front-end Sec-Grp)
+9. Create Launch Configuration
+10. Group Name
+11. Choose any 2 Subnets
+12. Advanced Details:
+    1. Tick Load Balacing
+    2. Target Groups -> Load Balancer #6 name
+    3. Tick Monitoring
+13. Create Auto Scaling Group
 
 
 ## Lambda's
