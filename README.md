@@ -268,6 +268,7 @@ Lambda:
 3. Runtime 'Python 3.8'
 4. Choose an Execution role -> Use Existing -> S3-Admin-Access
 5. In the Fucntion code paste 'lambda_load-csv.py' from the application folder of this repo.
+6. Change the S3 Bucket name to the name of the S3 bucket you create
 
 ### PushDataToQueue
 1. Create function
@@ -317,4 +318,7 @@ Lambda:
     3. To increase this you need to open a ticket on the support center.
 
 ## S3 Bucket
-
+1. Create Bucket
+2. Name it
+3. Tick CloudWatch Request Metrics
+4. Upload 'prizes.csv' into the bucket, its found in the application folder
