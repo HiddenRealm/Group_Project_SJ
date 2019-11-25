@@ -185,7 +185,26 @@ Under 'Auto Scaling' Select 'Auto Scaling Groups':
 
 
 ## Lambda's
-Here you will find information on how to set up all of the Lambda's you will need to run this app.
+Here you will find information on how to set up all of the Lambda's you will need to run this app.  
+Before you start creating the actual lambdas you should make the IAM roles needed.
+
+###### IAM Role - Create Roles:
+DynamoFullAccess:  
+
+    1. Select type of trusted entity (AWS Service)
+    2. Choose the service thay will use this role (Lambda)
+    3. Attach the following Permissions:
+        1. AWSLambdaFullAccess
+    4. Name the Role 'EC2'
+
+Dynamo+Lambda-Control:  
+
+    1. Select type of trusted entity (AWS Service)
+    2. Choose the service thay will use this role (Lambda)
+    3. Attach the following Permissions:
+        1. AWSLambdaFullAccess
+    4. Name the Role 'EC2'
+
 ### LetterGen
 
 ### PrizeGen
