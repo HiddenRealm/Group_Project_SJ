@@ -244,28 +244,28 @@ Lambda:
 ### LetterGen
 1. Create function
 2. Name 'LetterGen'
-3. Runtime 'Python 3.8'
+3. Runtime 'Python 3.7'
 4. Choose an Execution role -> Use Existing -> Lambda
 5. In the Fucntion code paste 'lambda_letter-gen.py' from the application folder of this repo.
 
 ### PrizeGen
 1. Create function
 2. Name 'PrizeGen'
-3. Runtime 'Python 3.8'
+3. Runtime 'Python 3.7'
 4. Choose an Execution role -> Use Existing -> DynamoFullAccess
 5. In the Fucntion code paste 'lambda_prize-gen.py' from the application folder of this repo.
 
 ### NumGen
 1. Create function
 2. Name 'NumGen'
-3. Runtime 'Python 3.8'
+3. Runtime 'Python 3.7'
 4. Choose an Execution role -> Use Existing -> Lambda
 5. In the Fucntion code paste 'lambda_num-gen.py' from the application folder of this repo.
 
 ### loadcsv
 1. Create function
 2. Name 'loadcsv'
-3. Runtime 'Python 3.8'
+3. Runtime 'Python 3.7'
 4. Choose an Execution role -> Use Existing -> S3-Admin-Access
 5. In the Fucntion code paste 'lambda_load-csv.py' from the application folder of this repo.
 6. Change the S3 Bucket name to the name of the S3 bucket you create
@@ -273,14 +273,14 @@ Lambda:
 ### PushDataToQueue
 1. Create function
 2. Name 'PushDataToQueue'
-3. Runtime 'Python 3.8'
+3. Runtime 'Python 3.7'
 4. Choose an Execution role -> Use Existing -> Lambda-SNS
 5. In the Fucntion code paste 'lambda_pushing-data.py' from the application folder of this repo.
 
 ### ListenAndPush
 1. Create function
 2. Name 'ListenAndPush'
-3. Runtime 'Python 3.8'
+3. Runtime 'Python 3.7'
 4. Choose an Execution role -> Use Existing -> LambdaToSQS
 5. In the Fucntion code paste 'lambda_sqs-listen.py' from the application folder of this repo.
 6. In the Designer hit '+ Add trigger':  
@@ -292,7 +292,7 @@ Lambda:
 ### AccountCreation
 1. Create function
 2. Name 'AccountCreation'
-3. Runtime 'Python 3.8'
+3. Runtime 'Python 3.7'
 4. Choose an Execution role -> Use Existing -> Dynamo+Lambda-Control
 5. In the Fucntion code paste 'lambda_account-creation.py' from the application folder of this repo.
 
