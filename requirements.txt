@@ -17,7 +17,7 @@ httplib2==0.9.1
 idna==2.0
 itsdangerous==1.1.0
 Jinja2==2.10.3
-Mako==1.0.3
+Mako==1.2.2
 MarkupSafe==1.1.1
 oauthlib==1.0.3
 padme==1.1.1
